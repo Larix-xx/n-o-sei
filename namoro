@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Namoro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #FFB6C1;
+        }
+        h1 {
+            font-size: 2em;
+            color: white;
+        }
+        .buttons {
+            margin-top: 30px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        #sim {
+            background-color: #32CD32; /* Verde */
+            color: white;
+        }
+        #nao {
+            background-color: #FF6347; /* Vermelho */
+            color: white;
+        }
+        #message {
+            display: none;
+            font-size: 1.5em;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Namora comigo pfv eu imploro!!! 💖</h1>
+    <div class="buttons">
+        <button id="sim">Sim</button>
+        <button id="nao">Não</button>
+    </div>
+
+    <p id="message">Ainda bem que aceitou, TMJ! 💕</p>
+
+    <script>
+        const simButton = document.getElementById("sim");
+        const naoButton = document.getElementById("nao");
+        const message = document.getElementById("message");
+
+        // Função para mover o botão "Não" para um lugar aleatório
+        function moveNaoButton() {
+            const randomX = Math.random() * (window.innerWidth - naoButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - naoButton.offsetHeight);
+            naoButton.style.position = "absolute";
+            naoButton.style.left = randomX + "px";
+            naoButton.style.top = randomY + "px";
+        }
+
+        // Detecta a proximidade do mouse ao botão "Não" e move o botão
+        naoButton.addEventListener("mouseenter", function() {
+            moveNaoButton();
+        });
+
+        simButton.addEventListener("click", function() {
+            // Exibe a mensagem quando o "Sim" for clicado
+            message.style.display = "block";
+            simButton.disabled = true;
+            naoButton.disabled = true;
+        });
+    </script>
+
+</body>
+</html>
