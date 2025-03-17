@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino SEQUELADO 🦖</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .game {
+            position: relative;
+            width: 600px;
+            height: 200px;
+            border: 2px solid black;
+            margin: 50px auto;
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+        #dino {
+            width: 40px;
+            height: 40px;
+            background-color: green;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+        }
+        .obstacle {
+            width: 30px;
+            height: 30px;
+            background-color: brown;
+            position: absolute;
+            bottom: 0;
+            right: -30px;
+            animation: moveObstacle 2s linear infinite;
+        }
+        @keyframes moveObstacle {
+            from { right: -30px; }
+            to { right: 600px; }
+        }
+        .jump {
+            animation: jump 0.6s ease-out;
+        }
+        @keyframes jump {
+            0% { bottom: 0; }
+            50% { bottom: 100px; }
+            100% { bottom: 0; }
+        }
+        #gameOver {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Jogo do Dino 🦖🌳</h1>
+    <p>Pressione a tecla <strong>ESPAÇO</strong> para pular!</p>
+
+    <div class="game">
+        <div id="dino"></div>
+        <div class="obstacle"></div>
+    </div>
+
+    <p id="gameOver">❌ O dinossauro morreu em Rondônia! 🌴</p>
+
+    <script>
+        const dino = document.getElementById("dino");
+        const obstacle = document.querySelector(".obstacle");
+        const gameOverText = document.getElementById("gameOver");
+
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") {
+                if (!dino.classList.contains("jump")) {
+                    dino.classList.add("jump");
+                    setTimeout(() => dino.classList.remove("jump"), 600);
+                }
+            }
+        });
+
+        function checkCollision() {
+            const dinoRect = dino.getBoundingClientRect();
+            const obstacleRect = obstacle.getBoundingClientRect();
+
+            if (
+                dinoRect.bottom > obstacleRect.top &&
+                dinoRect.right > obstacleRect.left &&
+                dinoRect.left < obstacleRect.right
+            ) {
+                gameOver();
+            }
+        }
+
+        function gameOver() {
+            obstacle.style.animation = "none";
+            gameOverText.style.display = "block";
+            clearInterval(gameLoop);
+        }
+
+        let gameLoop = setInterval(checkCollision, 50);
+    </script>
+
+</body>
+</html>
