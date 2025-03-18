@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansiedade?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            color: #4b9cd3;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        button {
+            background-color: #4b9cd3;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #357fa7;
+            transform: scale(1.1);
+        }
+        button:active {
+            background-color: #2a5d7e;
+        }
+        #resposta {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: opacity 0.5s;
+        }
+        .sim {
+            color: #ff6347;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .nao {
+            color: #32cd32;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Você está ansiosa?</h2>
+        <button onclick="responder('sim')">Sim</button>
+        <button onclick="responder('nao')">Não</button>
+
+        <p id="resposta"></p>
+    </div>
+
+    <script>
+        function responder(resposta) {
+            const mensagem = document.getElementById("resposta");
+
+            if (resposta === 'sim') {
+                mensagem.innerHTML = "Não fica ansiosa não!! você é linda!";
+                mensagem.className = 'sim'; // Aplica a classe 'sim' com cor e animação
+            } else if (resposta === 'nao') {
+                mensagem.innerHTML = "Boa, mlkote! Tmj!";
+                mensagem.className = 'nao'; // Aplica a classe 'nao' com cor e animação
+            }
+
+            // Reinicia a animação de fade-in para a resposta
+            mensagem.style.opacity = 0;
+            setTimeout(function() {
+                mensagem.style.opacity = 1;
+            }, 0);
+        }
+    </script>
+</body>
+</html>
